@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class FiscalDateServiceImpl implements FiscalDateService {
     @Override
-    public ResponseApi exchange(String country) {
+    public ResponseApi fetchExchangeRates(String country) {
         RestTemplate restTemplate = new RestTemplate();
         String url = builderUrl(country);
         ResponseEntity<ResponseApi> response = restTemplate.getForEntity(url, ResponseApi.class);

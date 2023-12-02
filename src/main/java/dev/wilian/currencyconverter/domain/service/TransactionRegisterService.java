@@ -1,5 +1,7 @@
 package dev.wilian.currencyconverter.domain.service;
 
+import dev.wilian.currencyconverter.domain.exception.BusinessException;
+import dev.wilian.currencyconverter.domain.exception.TransactionNotFoundException;
 import dev.wilian.currencyconverter.domain.model.Transaction;
 import dev.wilian.currencyconverter.domain.model.dto.PurchaseTransaction;
 import dev.wilian.currencyconverter.domain.repository.TransactionRepository;
@@ -27,14 +29,12 @@ public class TransactionRegisterService {
 
     public PurchaseTransaction getPurchaseTransaction(Long transactionId, String countryCurrency) {
         Transaction transaction = transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RuntimeException(
-                        String.format("Not exist transaction of codigo %d", transactionId)
-                ));
+                .orElseThrow(() -> new TransactionNotFoundException(transactionId));
 
-        ResponseApi responseApi = fiscalDateService.exchange(countryCurrency);
+        ResponseApi responseApi = fiscalDateService.fetchExchangeRates(countryCurrency);
+        if (responseApi.getData().isEmpty())
+            throw new BusinessException("The purchase cannot be converted to the target currency.");
         Optional<DataDetails> optionalDataDetails = responseApi.getData().stream().findFirst();
-        if (optionalDataDetails.isEmpty())
-            throw new RuntimeException("The purchase cannot be converted to the target currency.");
 
         return getCurrencyConvert(optionalDataDetails.get(), transaction);
     }
