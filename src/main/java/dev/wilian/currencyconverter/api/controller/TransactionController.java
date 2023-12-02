@@ -9,7 +9,6 @@ import dev.wilian.currencyconverter.api.model.input.TransactionInput;
 import dev.wilian.currencyconverter.domain.model.Transaction;
 import dev.wilian.currencyconverter.domain.service.TransactionRegisterService;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +41,7 @@ public class TransactionController {
     @GetMapping("/{transactionId}")
     public PurchaseTransactionModel currency(
             @PathVariable Long transactionId,
-            @PathParam("country") String country
+            @RequestParam(name = "country") String country
     ) {
         return purchaseTransactionModelAssembler.toModel(transactionRegister.getPurchaseTransaction(transactionId, country));
     }
