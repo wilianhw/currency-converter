@@ -1,7 +1,7 @@
 package dev.wilian.currencyconverter.domain.service;
 
-import dev.wilian.currencyconverter.infrastructure.service.fiscaldate.Data;
+import dev.wilian.currencyconverter.infrastructure.service.fiscaldate.ResponseApi;
 
 public interface FiscalDateService {
-    Data exchange(String country);
+    ResponseApi exchange(String country);
 }

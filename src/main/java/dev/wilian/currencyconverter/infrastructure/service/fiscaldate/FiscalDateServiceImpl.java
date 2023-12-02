@@ -11,10 +11,10 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class FiscalDateServiceImpl implements FiscalDateService {
     @Override
-    public Data exchange(String country) {
+    public ResponseApi exchange(String country) {
         RestTemplate restTemplate = new RestTemplate();
         String url = builderUrl(country);
-        ResponseEntity<Data> response = restTemplate.getForEntity(url, Data.class);
+        ResponseEntity<ResponseApi> response = restTemplate.getForEntity(url, ResponseApi.class);
         return response.getBody();
     }
 

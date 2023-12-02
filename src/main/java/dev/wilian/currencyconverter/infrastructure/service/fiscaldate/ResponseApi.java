@@ -7,6 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Data {
+public class ResponseApi {
     private List<DataDetails> data;
 }
