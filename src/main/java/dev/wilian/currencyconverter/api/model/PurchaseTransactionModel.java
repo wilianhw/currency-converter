@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class CurrencyExchangeModel extends TransactionModel{
+public class PurchaseTransactionModel extends TransactionModel{
     private BigDecimal exchangeRate;
     private BigDecimal convertedPurchaseAmount;
 }

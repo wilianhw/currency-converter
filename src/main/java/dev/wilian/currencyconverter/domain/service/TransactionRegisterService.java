@@ -1,7 +1,7 @@
 package dev.wilian.currencyconverter.domain.service;
 
 import dev.wilian.currencyconverter.domain.model.Transaction;
-import dev.wilian.currencyconverter.domain.model.dto.CurrencyConvert;
+import dev.wilian.currencyconverter.domain.model.dto.PurchaseTransaction;
 import dev.wilian.currencyconverter.domain.repository.TransactionRepository;
 import dev.wilian.currencyconverter.infrastructure.service.fiscaldate.DataDetails;
 import dev.wilian.currencyconverter.infrastructure.service.fiscaldate.ResponseApi;
@@ -25,7 +25,7 @@ public class TransactionRegisterService {
         return transactionRepository.save(transaction);
     }
 
-    public CurrencyConvert exchange(Long transactionId, String countryCurrency) {
+    public PurchaseTransaction getPurchaseTransaction(Long transactionId, String countryCurrency) {
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new RuntimeException(
                         String.format("Not exist transaction of codigo %d", transactionId)
@@ -39,15 +39,15 @@ public class TransactionRegisterService {
         return getCurrencyConvert(optionalDataDetails.get(), transaction);
     }
 
-    private static CurrencyConvert getCurrencyConvert(DataDetails dataDetails, Transaction transaction) {
-        CurrencyConvert currencyConvert = new CurrencyConvert();
-        currencyConvert.setId(transaction.getId());
-        currencyConvert.setDescription(transaction.getDescription());
-        currencyConvert.setTransactionDate(transaction.getTransactionDate());
-        currencyConvert.setPurchaseAmount(transaction.getPurchaseAmount());
+    private static PurchaseTransaction getCurrencyConvert(DataDetails dataDetails, Transaction transaction) {
+        PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
+        purchaseTransaction.setId(transaction.getId());
+        purchaseTransaction.setDescription(transaction.getDescription());
+        purchaseTransaction.setTransactionDate(transaction.getTransactionDate());
+        purchaseTransaction.setPurchaseAmount(transaction.getPurchaseAmount());
         BigDecimal exchangeRate = new BigDecimal(dataDetails.getExchange_rate());
-        currencyConvert.setExchangeRate(exchangeRate);
-        currencyConvert.setConvertedPurchaseAmount(exchangeRate.multiply(transaction.getPurchaseAmount()));
-        return currencyConvert;
+        purchaseTransaction.setExchangeRate(exchangeRate);
+        purchaseTransaction.setConvertedPurchaseAmount(exchangeRate.multiply(transaction.getPurchaseAmount()));
+        return purchaseTransaction;
     }
 }

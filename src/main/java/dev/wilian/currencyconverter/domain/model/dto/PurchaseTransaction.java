@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CurrencyConvert {
+public class PurchaseTransaction {
     private Long id;
     private String description;
     private LocalDate transactionDate;

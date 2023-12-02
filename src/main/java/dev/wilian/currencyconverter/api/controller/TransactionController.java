@@ -1,9 +1,9 @@
 package dev.wilian.currencyconverter.api.controller;
 
-import dev.wilian.currencyconverter.api.assembler.CurrencyConvertModelAssembler;
+import dev.wilian.currencyconverter.api.assembler.PurchaseTransactionModelAssembler;
 import dev.wilian.currencyconverter.api.assembler.TransactionModelAssembler;
 import dev.wilian.currencyconverter.api.disassembler.TransactionInputDisassembler;
-import dev.wilian.currencyconverter.api.model.CurrencyExchangeModel;
+import dev.wilian.currencyconverter.api.model.PurchaseTransactionModel;
 import dev.wilian.currencyconverter.api.model.TransactionModel;
 import dev.wilian.currencyconverter.api.model.input.TransactionInput;
 import dev.wilian.currencyconverter.domain.model.Transaction;
@@ -20,13 +20,13 @@ public class TransactionController {
     private final TransactionModelAssembler transactionModelAssembler;
     private final TransactionInputDisassembler transactionInputDisassembler;
     private final TransactionRegisterService transactionRegister;
-    private final CurrencyConvertModelAssembler currencyConvertModelAssembler;
+    private final PurchaseTransactionModelAssembler purchaseTransactionModelAssembler;
 
-    public TransactionController(TransactionModelAssembler transactionModelAssembler, TransactionInputDisassembler transactionInputDisassembler, TransactionRegisterService transactionRegister, CurrencyConvertModelAssembler currencyConvertModelAssembler) {
+    public TransactionController(TransactionModelAssembler transactionModelAssembler, TransactionInputDisassembler transactionInputDisassembler, TransactionRegisterService transactionRegister, PurchaseTransactionModelAssembler purchaseTransactionModelAssembler) {
         this.transactionModelAssembler = transactionModelAssembler;
         this.transactionInputDisassembler = transactionInputDisassembler;
         this.transactionRegister = transactionRegister;
-        this.currencyConvertModelAssembler = currencyConvertModelAssembler;
+        this.purchaseTransactionModelAssembler = purchaseTransactionModelAssembler;
     }
 
     @PostMapping
@@ -40,10 +40,10 @@ public class TransactionController {
     }
 
     @GetMapping("/{transactionId}")
-    public CurrencyExchangeModel currency(
+    public PurchaseTransactionModel currency(
             @PathVariable Long transactionId,
             @PathParam("country") String country
     ) {
-        return currencyConvertModelAssembler.toModel(transactionRegister.exchange(transactionId, country));
+        return purchaseTransactionModelAssembler.toModel(transactionRegister.getPurchaseTransaction(transactionId, country));
     }
 }
