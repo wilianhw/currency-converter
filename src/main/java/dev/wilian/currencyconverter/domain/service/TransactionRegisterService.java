@@ -34,7 +34,7 @@ public class TransactionRegisterService {
         ResponseApi responseApi = fiscalDateService.exchange(countryCurrency);
         Optional<DataDetails> optionalDataDetails = responseApi.getData().stream().findFirst();
         if (optionalDataDetails.isEmpty())
-            throw new RuntimeException("Não foi encontrado dados para a moeda selecionada");
+            throw new RuntimeException("The purchase cannot be converted to the target currency.");
 
         return getCurrencyConvert(optionalDataDetails.get(), transaction);
     }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -19,4 +20,16 @@ public class PurchaseTransaction {
     private BigDecimal purchaseAmount;
     private BigDecimal exchangeRate;
     private BigDecimal convertedPurchaseAmount;
+
+    public void setPurchaseAmount(BigDecimal purchaseAmount) {
+        if (purchaseAmount != null)
+            purchaseAmount = purchaseAmount.setScale(2, RoundingMode.HALF_UP);
+        this.purchaseAmount = purchaseAmount;
+    }
+
+    public void setConvertedPurchaseAmount(BigDecimal convertedPurchaseAmount) {
+        if (convertedPurchaseAmount != null)
+            convertedPurchaseAmount = convertedPurchaseAmount.setScale(2, RoundingMode.HALF_UP);
+        this.convertedPurchaseAmount = convertedPurchaseAmount;
+    }
 }
