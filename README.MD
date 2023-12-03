@@ -22,7 +22,7 @@ Follow these instructions to get the project up and running on your local machin
 	  cd currency-converter-api
 3. Run the command:
    ```bash
-	  mvn clean package
+	  mvn install -DskipTests
 4. Build and run the application with Docker Compose.
    ```bash
    docker-compose up --build
