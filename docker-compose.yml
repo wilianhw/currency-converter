@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  postgres:
+  currency-converter-postgres:
     image: postgres:latest
     container_name: postgres
     environment:
@@ -9,11 +9,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5433:5432"
+      - "5444:5432"
     networks:
       - currency-converter-network
 
-  spring-boot-app:
+  currency-converter-api:
     build:
       context: .
       dockerfile: Dockerfile
@@ -29,7 +29,7 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      - currency-converter-postgres
     networks:
       - currency-converter-network
 
