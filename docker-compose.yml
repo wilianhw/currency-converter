@@ -24,6 +24,8 @@ services:
       - spring.datasource.password=postgres
       - spring.datasource.driver-class-name=org.postgresql.Driver
       - spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+      - spring.flyway.schemas=currency-converter
+      - spring.jpa.properties.hibernate.default_schema=currency-converter
     ports:
       - "8080:8080"
     depends_on:
