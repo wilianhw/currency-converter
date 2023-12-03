@@ -3,7 +3,7 @@ version: '3'
 services:
   currency-converter-postgres:
     image: postgres:latest
-    container_name: postgres
+    container_name: currency-converter-postgres
     environment:
       POSTGRES_DB: currency-converter
       POSTGRES_USER: postgres
@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: spring-boot-app
+    container_name: currency-converter-api
     environment:
       - spring.datasource.url=jdbc:postgresql://postgres:5432/currency-converter
       - spring.datasource.username=postgres
