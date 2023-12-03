@@ -10,6 +10,7 @@ Follow these instructions to get the project up and running on your local machin
 
 - Docker
 - Docker Compose
+- Maven
 
 ### Running with Docker Compose
 
@@ -18,8 +19,11 @@ Follow these instructions to get the project up and running on your local machin
    git clone https://github.com/wilianhw/currency-converter.git
 2. Navigate to the project directory
    ```bash
-	cd currency-converter-api
-3. Build and run the application with Docker Compose.
+	  cd currency-converter-api
+3. Run the command:
+   ```bash
+	  mvn clean package
+4. Build and run the application with Docker Compose.
    ```bash
    docker-compose up --build
 
