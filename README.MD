@@ -11,6 +11,7 @@ Follow these instructions to get the project up and running on your local machin
 - Docker
 - Docker Compose
 - Maven
+- jdk-17
 
 ### Running with Docker Compose
 
