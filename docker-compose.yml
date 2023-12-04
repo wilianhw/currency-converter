@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: currency-converter-api
     environment:
-      - spring.datasource.url=jdbc:postgresql://postgres:5432/currency-converter
+      - spring.datasource.url=jdbc:postgresql://currency-converter-postgres:5432/currency-converter
       - spring.datasource.username=postgres
       - spring.datasource.password=postgres
       - spring.datasource.driver-class-name=org.postgresql.Driver
