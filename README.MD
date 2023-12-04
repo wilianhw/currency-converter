@@ -11,7 +11,6 @@ Follow these instructions to get the project up and running on your local machin
 - Docker
 - Docker Compose
 - Maven
-- jdk-17
 
 ### Running with Docker Compose
 
@@ -23,7 +22,7 @@ Follow these instructions to get the project up and running on your local machin
    cd currency-converter
 3. Run the command:
    ```bash
-   mvn install -DskipTests
+   ./mvnw install -DskipTests
 4. Build and run the application with Docker Compose.
    ```bash
    docker-compose up --build
